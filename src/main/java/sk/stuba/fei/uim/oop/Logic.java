@@ -1,41 +1,42 @@
 package sk.stuba.fei.uim.oop;
-
-import lombok.Getter;
-
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
 
-public class Logic implements KeyListener, ChangeListener {
 
-    @Getter
-    private JLabel label;
+public class Logic implements ActionListener {
+
     private JFrame frame;
 
     public Logic(JFrame frame) {
         this.frame = frame;
-        this.label = new JLabel("Zaciatocny text");
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        System.out.println("Stlacil si " + e.getKeyChar());
-    }
+    public void actionPerformed(ActionEvent e) {
+        FileDialog fd = new FileDialog(frame,"Diaolg na vyber suboru",FileDialog.SAVE);
+        fd.setDirectory("C:\\");
+        fd.setFile("mojFile.txt");
+        fd.setVisible(true);
 
-    @Override
-    public void keyReleased(KeyEvent e) {
+        String filename = fd.getFile();
+        if (filename == null) {
+            System.out.println("Zrusil si vyber");
+        }else {
+            System.out.println("Miesto ulozenia: " + fd.getDirectory() + filename);
+            try {
+                FileOutputStream fos = new FileOutputStream(fd.getDirectory() + filename);
+                OutputStreamWriter out = new OutputStreamWriter(fos);
+                PrintWriter toFile = new PrintWriter(out);
 
-    }
-
-    @Override
-    public void stateChanged(ChangeEvent e) {
-            this.label.setText("Cislo " + ((JSlider) e.getSource()).getValue());
+                toFile.println("Toto je zapis do suboru");
+                toFile.close();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }
