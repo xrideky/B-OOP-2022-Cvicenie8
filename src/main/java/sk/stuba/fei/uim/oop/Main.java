@@ -1,22 +1,18 @@
 package sk.stuba.fei.uim.oop;
 
-import javax.swing.*;
-import java.io.*;
+import sk.stuba.fei.uim.oop.utility.Message;
+
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Okno");
-        frame.setSize(500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ArrayList<Message> messages= new ArrayList();
 
-        Logic logic = new Logic(frame);
+        messages.add(new Message("hello"));
+        messages.add(new Message("world"));
 
-        JButton button = new JButton("Ulozit");
-        button.setFocusable(false);
-        button.addActionListener(logic);
-
-        frame.add(button);
-
-        frame.setVisible(true);
+        for(Message m : messages){
+            System.out.println(m.getContent());
+        }
     }
 }
