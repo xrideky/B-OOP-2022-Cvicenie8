@@ -6,19 +6,13 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Message> messages= new ArrayList();
+       GenericIndex<Character, Message> concreteIndex = new GenericIndex<>();
+        var old  = concreteIndex.put('w',new Message("world"));
+        System.out.println(old);
+        old = concreteIndex.put('h',new Message("hello world"));
+        System.out.println(old);
+        old = concreteIndex.put('h',new Message("hello"));
+        System.out.println(old);
 
-        messages.add(new Message("hello"));
-        messages.add(new Message("world"));
-
-        for(Message m : messages){
-            System.out.println(m.getContent());
-        }
-
-       ConcreteIndex concreteIndex = new ConcreteIndex();
-       concreteIndex.add(new Message("hello"));
-       concreteIndex.add(new Message("world"));
-       concreteIndex.add(new Message("hello world"));
-       System.out.println(concreteIndex.toString());
     }
 }
