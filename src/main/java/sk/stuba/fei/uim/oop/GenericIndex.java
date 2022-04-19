@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class GenericIndex<KEY_TYPE, VALUE_TYPE> {
 
-    private Map<KEY_TYPE, List<VALUE_TYPE>> index;
+    protected Map<KEY_TYPE, List<VALUE_TYPE>> index;
 
     public GenericIndex(){
         this.index = new HashMap<>();

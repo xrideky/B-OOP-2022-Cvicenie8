@@ -3,27 +3,13 @@ package sk.stuba.fei.uim.oop;
 import sk.stuba.fei.uim.oop.utility.Message;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class ConcreteIndex {
+public class ConcreteIndex extends GenericIndex<Character, Message>{
 
-    private Map<Character, List<Message>> index;
-
-    public ConcreteIndex(){
-        this.index = new HashMap<>();
-    }
 
     public void add(Message m){
-        Character firstChar = m.getContent().charAt(0);
-        if(this.index.containsKey(firstChar)){
-            this.index.get(firstChar).add(m);
-        }else {
-            List<Message> newList = new ArrayList<>();
-            newList.add(m);
-            this.index.put(firstChar,newList);
-        }
+        this.put(m.getContent().charAt(0),m);
     }
 
     public String toString() {
